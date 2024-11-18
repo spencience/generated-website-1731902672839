@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                        <title>Home</title>
+                        <script src="https://cdn.tailwindcss.com"></script>
+                    </head>
+                    <body class="bg-white">
+                        <main class="container mx-auto p-4 pt-6 mt-10 md:p-6 lg:p-12 xl:p-24">
+  <section class="mb-10">
+    <h1 class="text-3xl font-bold leading-tight text-gray-900">Cryptogram Generator</h1>
+    <p class="text-lg text-gray-600">Create your own cryptograms and challenge your friends to decipher them!</p>
+  </section>
+  <section class="mb-10">
+    <form id="cryptogram-form">
+      <label for="message" class="block text-sm font-medium text-gray-700">Enter your message:</label>
+      <textarea id="message" rows="4" class="block w-full p-2 mt-1 text-lg text-gray-600 border border-gray-300 rounded-md"></textarea>
+      <button id="generate-button" type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Generate Cryptogram</button>
+    </form>
+    <div id="cryptogram-output" class="hidden mt-4 p-4 bg-gray-100 rounded"></div>
+  </section>
+  <section class="mb-10">
+    <h2 class="text-2xl font-bold leading-tight text-gray-900">How it works:</h2>
+    <p class="text-lg text-gray-600">Our cryptogram generator uses a simple substitution cipher to replace each letter with a corresponding symbol.</p>
+    <button id="show-more-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Show more</button>
+    <div id="more-info" class="hidden mt-4 p-4 bg-gray-100 rounded">
+      <p class="text-lg text-gray-600">To generate a cryptogram, simply enter your message in the input field above, and click the "Generate Cryptogram" button.</p>
+    </div>
+  </section>
+  <script>
+    const form = document.getElementById('cryptogram-form');
+    const messageInput = document.getElementById('message');
+    const generateButton = document.getElementById('generate-button');
+    const cryptogramOutput = document.getElementById('cryptogram-output');
+    const showMoreButton = document.getElementById('show-more-button');
+    const moreInfo = document.getElementById('more-info');
+
+    generateButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      const message = messageInput.value;
+      const cryptogram = generateCryptogram(message);
+      cryptogramOutput.innerHTML = cryptogram;
+      cryptogramOutput.classList.remove('hidden');
+    });
+
+    showMoreButton.addEventListener('click', () => {
+      moreInfo.classList.toggle('hidden');
+    });
+
+    function generateCryptogram(message) {
+      const substitution = {
+        'a': 'α', 'b': 'β', 'c': 'γ', 'd': 'δ', 'e': 'ε',
+        'f': 'ζ', 'g': 'η', 'h': 'θ', 'i': 'ι', 'j': 'ἰ',
+        'k': 'κ', 'l': 'λ', 'm': 'μ', 'n': 'ν', 'o': 'ο',
+        'p': 'π', 'q': 'ρ', 'r': 'σ', 's': 'τ', 't': 'υ',
+        'u': 'φ', 'v': 'χ', 'w': 'ψ', 'x': 'ω', 'y': '	yy',
+        'z': 'ββ',
+      };
+      return message.toLowerCase().split('').map((letter) => substitution[letter] || letter).join('');
+    }
+  </script>
+</main>
+                    </body>
+                    </html>
